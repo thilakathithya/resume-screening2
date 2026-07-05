@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Screening Agent</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-inner">
+    <div class="logo">🤖 <span>Resume Screening Agent</span></div>
+    <div class="tagline">AI-powered resume filtering using Gemini LLM</div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- STEP 1: Create Job Requirement -->
+  <section class="card">
+    <h2>1. Define Job Requirement</h2>
+    <form id="jobForm">
+      <div class="grid-2">
+        <div class="field">
+          <label>Job Title *</label>
+          <input type="text" id="jobTitle" placeholder="e.g. Backend Java Developer" required>
+        </div>
+        <div class="field">
+          <label>Minimum Experience (years)</label>
+          <input type="number" id="minExperience" min="0" placeholder="e.g. 3">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Job Description *</label>
+        <textarea id="jobDescription" rows="3" placeholder="Brief description of the role and responsibilities..." required></textarea>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label>Required Skills * (comma separated)</label>
+          <input type="text" id="requiredSkills" placeholder="Java, Spring Boot, SQL, REST APIs" required>
+        </div>
+        <div class="field">
+          <label>Nice-to-have Skills (comma separated)</label>
+          <input type="text" id="niceToHaveSkills" placeholder="Docker, Kubernetes, AWS">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Qualification</label>
+        <input type="text" id="qualification" placeholder="e.g. B.E/B.Tech in Computer Science">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Job & Continue</button>
+    </form>
+  </section>
+
+  <!-- STEP 2: Select job + upload resumes -->
+  <section class="card" id="uploadSection" style="display:none;">
+    <h2>2. Upload Candidate Resumes</h2>
+    <p class="muted">Screening against job: <strong id="activeJobTitle"></strong></p>
+
+    <div class="field">
+      <label>Select Job</label>
+      <select id="jobSelect"></select>
+    </div>
+
+    <div class="field">
+      <label>Upload Resumes (PDF, DOCX, or TXT — multiple allowed)</label>
+      <input type="file" id="resumeFiles" multiple accept=".pdf,.docx,.txt">
+    </div>
+
+    <button id="screenBtn" class="btn btn-primary">
+      <span id="screenBtnText">Screen Resumes with AI</span>
+    </button>
+    <div id="loadingIndicator" class="loading" style="display:none;">
+      ⏳ Analyzing resumes with Gemini AI... please wait
+    </div>
+    <div id="uploadError" class="error-box" style="display:none;"></div>
+  </section>
+
+  <!-- STEP 3: Results -->
+  <section class="card" id="resultsSection" style="display:none;">
+    <div class="results-header">
+      <h2>3. Ranked Candidates</h2>
+      <div class="filter-controls">
+        <label>Filter by verdict:</label>
+        <select id="verdictFilter">
+          <option value="ALL">All</option>
+          <option value="STRONGLY_RECOMMENDED">Strongly Recommended</option>
+          <option value="RECOMMENDED">Recommended</option>
+          <option value="NOT_RECOMMENDED">Not Recommended</option>
+        </select>
+      </div>
+    </div>
+    <div id="resultsList" class="results-list"></div>
+  </section>
+
+</main>
+
+<!-- Detail Modal -->
+<div id="detailModal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer class="app-footer">
+  Built with Spring Boot + Google Gemini + H2 Database · Dockerized
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
