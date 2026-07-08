@@ -36,7 +36,7 @@ public class GeminiClientService {
     @Value("${gemini.api.model:gemini-2.5-flash}")
     private String model;
 
-    @Value("${gemini.api.base-url:https://generativelanguage.googleapis.com/v1beta/models}")
+    @Value("${https://aistudio.google.com/api-keys?project=gen-lang-client-0200989972}")
     private String baseUrl;
 
     @Value("${gemini.api.temperature:0.2}")
@@ -51,7 +51,7 @@ public class GeminiClientService {
      * (expected to be a JSON string, per our prompt's output-format instructions).
      */
     public String generateContent(String prompt) {
-        if (apiKey == null || apiKey.isBlank() || apiKey.equals("YOUR_GEMINI_API_KEY_HERE")) {
+        if (apiKey == null || apiKey.isBlank() || apiKey.equals("AQ.Ab8RN6KgMF7WgPWrTVTtTcqbXMCp7A9zRgTMi2giT9FcdK7edA")) {
             throw new LlmProcessingException(
                 "Gemini API key is not configured. Set GEMINI_API_KEY environment variable " +
                 "or gemini.api.key in application.properties.");
